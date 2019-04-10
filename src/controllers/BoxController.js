@@ -8,7 +8,10 @@ class BoxController {
     }
 
     async get(req, res) {
-        const box = await Box.find()
+        const box = await Box.find().populate({
+            path: 'files',
+            options: { sort: { createdAt: -1 } }
+        })
         return res.json(box)
     }
 
